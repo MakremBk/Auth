@@ -1,0 +1,12 @@
+.circle {
+  display: inline-block;
+  border: 2px dotted orange;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+img {
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+}

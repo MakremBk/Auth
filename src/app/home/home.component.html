@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+
+            <div class="input-group my-5">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Search</span>
+                </div>
+                <input type="text" class="form-control" placeholder="type your search" aria-label="Username"
+                    aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-2 my-5">
+            <button class="btn btn-block btn-primary" (click)="openModal(content)">Add</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card" *ngFor="let product of products">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2  ">name : {{product.name}}</div>
+                    <div class="col-3  "> price : {{product.price}}</div>
+                    <div class="col-6  "> description : {{product.desc}}</div>
+                    <div class="col-12">
+                        details :
+                        <div class="row" *ngFor="let detail of product.details">
+                            <div class="col">{{detail.name}}</div>
+                            <div class="col">{{detail.price}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="productForm">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="name" placeholder="name" aria-label="name"
+                    aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="price" placeholder="price"
+                    aria-label="price" aria-describedby="basic-addon2">
+
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="desc" placeholder="desc"
+                    aria-label="desc" aria-describedby="basic-addon2">
+            </div>
+
+            <hr>
+
+            <button (click)="addDetail()" class="btn btn-block" >add detail</button>
+            <div formArrayName="details" *ngFor="let detail of productForm.get('details').controls; let i =index" class="border">
+                <div class="input-group mb-3 m-1">
+                    <input type="text" class="form-control"  placeholder="name"
+                        aria-label="name" aria-describedby="basic-addon2">
+                </div>
+                <div class="input-group mb-3 m-1">
+                    <input type="text" class="form-control"  placeholder="price"
+                        aria-label="price" aria-describedby="basic-addon2">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="saveProduct(modal)">Save</button>
+    </div>
+</ng-template>
